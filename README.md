@@ -1,6 +1,3 @@
-# CS151-group-project
+# CS151 group project
 
-Team Theta:
-  Abert Chan
-  Eric Au
-  Yvonne Hoang
+Team Theta: Albert Chan, Eric Au, Yvonne Hoang
