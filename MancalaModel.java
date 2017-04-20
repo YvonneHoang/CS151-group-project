@@ -261,28 +261,7 @@ public class MancalaModel {
     }
     
     
-    /*
-     * helper method to get opposite pit number
-     */
-    private int oppPit(int pit) {
-        switch (pit) {
-        case 0:
-            return 5;
-        case 1:
-            return 4;
-        case 2:
-            return 3;
-        case 3:
-            return 2;
-        case 4:
-            return 1;
-        case 5:
-            return 0;
-        default:
-            return -1;
-        
-        }
-    }
+
     
     private char getOppPlayer(char player) {
         return (player == 'a' ? 'b' : 'a');
