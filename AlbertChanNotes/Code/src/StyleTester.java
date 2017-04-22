@@ -43,10 +43,10 @@ public class StyleTester extends JComponent{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		boardStyle.drawBoard(g2);
-		boardStyle.drawMancala(1, 0, g2);
-		boardStyle.drawMancala(0, 0, g2);
+		boardStyle.drawMancala(1, 4, g2);
+		boardStyle.drawMancala(0, 7, g2);
 		for (int i=0; i<12; i++){
-			boardStyle.drawPit(i, 0, g2);
+			boardStyle.drawPit(i, i, g2);
 		}
 	}
 

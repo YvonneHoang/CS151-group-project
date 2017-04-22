@@ -10,6 +10,7 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author UnHou Chan
@@ -22,6 +23,7 @@ public class ConcreteBoardv1 implements BoardStyle {
 	private final static int PIT_DIAMETER= 50;	//d
 	private final static int MAN_WIDTH = 50;	//mW
 	private final static int MAN_HEIGHT= 150;	//mH
+	private final static int STONE_DIAMETER = 5;
 
 	
 	private ArrayList<Shape> pitShapes = new ArrayList<Shape>();
@@ -65,7 +67,6 @@ public class ConcreteBoardv1 implements BoardStyle {
 	@Override
 	public void drawBoard(Graphics2D g2) {
 		g2.setColor(new Color(0xaf8c56));
-		g2.draw(boardShape);
 		g2.fill(boardShape);
 	}
 
@@ -76,8 +77,8 @@ public class ConcreteBoardv1 implements BoardStyle {
 	public void drawPit(int pitID, int stones, Graphics2D g2) {
 		if (pitID<=11 && pitID >=0) {
 			g2.setColor(new Color(0xff0000));
-			g2.draw(pitShapes.get(pitID));
 			g2.fill(pitShapes.get(pitID));
+			this.drawStone(g2, pitShapes.get(pitID), stones);
 		}
 	}
 
@@ -93,9 +94,9 @@ public class ConcreteBoardv1 implements BoardStyle {
 			temp = this.mancalaShapesB;
 		if (temp!= null) {
 			g2.setColor(new Color(0x00ffff));
-			g2.draw(temp);
 			g2.fill(temp);
 		}
+		this.drawStone(g2, temp, stones);
 	}
 
 	/* (non-Javadoc)
@@ -120,6 +121,31 @@ public class ConcreteBoardv1 implements BoardStyle {
 				return i;
 		}
 		return -1;
+	}
+	
+	
+	public void drawStone(Graphics2D g2, Shape s, int stones){
+		int x = (int) s.getBounds2D().getX();
+		int y = (int) s.getBounds2D().getY();
+		int w = (int) s.getBounds2D().getWidth();
+		int h = (int) s.getBounds2D().getHeight();
+		
+		Random random = new Random();
+		
+		
+		for (int i=0; i < stones; i++){
+			int rx = random.nextInt(w) + x;
+			int ry = random.nextInt(h) + y;
+			while (!s.contains(rx, ry)) {
+				rx = random.nextInt(w - STONE_DIAMETER) + x;
+				ry = random.nextInt(h - STONE_DIAMETER) + y;
+			}
+			Shape stoneShape = new Ellipse2D.Double(rx, ry, STONE_DIAMETER, STONE_DIAMETER);
+			g2.setColor(new Color(0));
+			g2.draw(stoneShape);
+			g2.setColor(new Color(0xffffff));
+			g2.fill(stoneShape);
+		}
 	}
 
 }
