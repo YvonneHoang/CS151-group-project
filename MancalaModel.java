@@ -195,7 +195,7 @@ public class MancalaModel {
         }
     }
     
-    private char getOppPlayer(char player) {
+    public char getOppPlayer(char player) {
         return (player == 'a' ? 'b' : 'a');
     }
     
