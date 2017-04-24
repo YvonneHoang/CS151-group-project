@@ -1,4 +1,3 @@
-package mancala;
 
 import java.util.*;
 import javax.swing.event.*;
