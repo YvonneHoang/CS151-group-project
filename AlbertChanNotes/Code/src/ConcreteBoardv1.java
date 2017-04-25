@@ -4,6 +4,7 @@
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
@@ -79,6 +80,20 @@ public class ConcreteBoardv1 implements BoardStyle {
 			g2.setColor(new Color(0xff0000));
 			g2.fill(pitShapes.get(pitID));
 			this.drawStone(g2, pitShapes.get(pitID), stones);
+			if (pitID<6) {
+				int x = (int)pitShapes.get(pitID).getBounds2D().getX();
+				int y = (int)pitShapes.get(pitID).getBounds2D().getY();
+				g2.setColor(Color.WHITE);
+				g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 15));
+				g2.drawString("A"+String.valueOf((pitID+1)), x + 15, y);
+			} else {
+				int x = (int)pitShapes.get(pitID).getBounds2D().getX();
+				int y = (int)pitShapes.get(pitID).getBounds2D().getY();
+				g2.setColor(Color.WHITE);
+				g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 15));
+				g2.drawString("B"+String.valueOf((pitID+1)%6), x + 15, y + PIT_DIAMETER + 15);
+			}
+			
 		}
 	}
 
@@ -88,15 +103,22 @@ public class ConcreteBoardv1 implements BoardStyle {
 	@Override
 	public void drawMancala(int mID, int stones, Graphics2D g2) {
 		Shape temp = null;
+		String ab = "";
 		if (mID == 0) 
-			temp = this.mancalaShapesA;
+			{temp = this.mancalaShapesA; ab = "A";}
 		if (mID == 1)
-			temp = this.mancalaShapesB;
+			{temp = this.mancalaShapesB; ab = "B";}
 		if (temp!= null) {
 			g2.setColor(new Color(0x00ffff));
 			g2.fill(temp);
+			//drawString
+			g2.setColor(Color.BLACK);
+			g2.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
+			g2.drawString(ab, (int)temp.getBounds2D().getX()+(int)temp.getBounds2D().getWidth()/2-15,
+					MAN_HEIGHT/2);
+			//drawStones
+			this.drawStone(g2, temp, stones);
 		}
-		this.drawStone(g2, temp, stones);
 	}
 
 	/* (non-Javadoc)
@@ -136,7 +158,7 @@ public class ConcreteBoardv1 implements BoardStyle {
 		for (int i=0; i < stones; i++){
 			int rx = random.nextInt(w) + x;
 			int ry = random.nextInt(h) + y;
-			while (!s.contains(rx, ry)) {
+			while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER))) {
 				rx = random.nextInt(w - STONE_DIAMETER) + x;
 				ry = random.nextInt(h - STONE_DIAMETER) + y;
 			}
@@ -146,6 +168,17 @@ public class ConcreteBoardv1 implements BoardStyle {
 			g2.setColor(new Color(0xffffff));
 			g2.fill(stoneShape);
 		}
+	}
+
+	@Override
+	public int getWidth() {
+		return BOARD_WIDTH;
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return BOARD_HEIGHT;
 	}
 
 }

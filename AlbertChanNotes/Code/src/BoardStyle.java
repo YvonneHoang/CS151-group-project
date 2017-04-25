@@ -54,5 +54,15 @@ public interface BoardStyle {
 	 * <br> -1 : no pit selected
 	 */
 	int pitSelected(int x, int y);
+	
+	/**
+	 * @return Width of the board
+	 */
+	int getWidth();
+	
+	/**
+	 * @return Height of the board
+	 */
+	int getHeight();
 
 }
