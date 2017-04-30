@@ -31,7 +31,8 @@ public class StyleTester extends JComponent{
 		this.setLayout(null);
 		Insets inset = this.getInsets();
 		
-		boardStyle = new ConcreteBoardv1();
+		//boardStyle = new ConcreteBoardv1();
+		boardStyle = new ConcreteBoardv2();
 		this.setPreferredSize(new Dimension(boardStyle.getWidth(),boardStyle.getHeight()));
 		
 		for (int i=0;i<12;i++){
