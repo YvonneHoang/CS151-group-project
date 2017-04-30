@@ -27,6 +27,7 @@ public class PitComponent extends JComponent implements ChangeListener
 		this.pitID = pitID;
 		this.style = style;
 		this.model = model;
+		model.attach(this);
 		char player;
 		if(pitID < 6)
 			player = 'a';

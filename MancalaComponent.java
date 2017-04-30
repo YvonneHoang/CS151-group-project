@@ -22,6 +22,7 @@ public class MancalaComponent extends JComponent implements ChangeListener
 		this.mID = mID;
 		this.style = style;
 		this.model = model;
+		model.attach(this);
 		this.stones = model.getMancalaValue(mID);
 	}
 	
