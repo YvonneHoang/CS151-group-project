@@ -1,3 +1,4 @@
+package mancala;
 
 import java.util.*;
 import javax.swing.event.*;
@@ -35,7 +36,7 @@ public class MancalaModel {
         cListeners = new ArrayList<ChangeListener>();
     }
     
-        private void setStoneCount(int numberOfStones) {
+    public void setStoneCount(int numberOfStones) {
         a = new Pit[6];
         for(int i =0; i < 6;i++) {
             a[i] = new Pit(numberOfStones);
@@ -46,7 +47,7 @@ public class MancalaModel {
         }
     }
     
-    private void saveState()
+    public void saveState()
     {
         //loop for your own stones
         for(int i =0; i <6;i++) {
@@ -75,9 +76,7 @@ public class MancalaModel {
             l.stateChanged(new ChangeEvent(this));
         }
     }
-    
-    
-    
+
     public void performTurn(char p, int pitNum) {
         int pitValue = getPitValue(currentPlayer, pitNum);
         if(pitValue==0|| p!= currentPlayer) {
@@ -171,9 +170,6 @@ public class MancalaModel {
         System.out.println(undoReset);
         update();
     }
-    
-    
-    
     /*
      * helper method to get opposite pit number
      */
@@ -192,8 +188,7 @@ public class MancalaModel {
         case 5:
             return 0;
         default:
-            return -1;
-        
+            return -1;       
         }
     }
     
@@ -244,8 +239,7 @@ public class MancalaModel {
                 return 'a';
             else
                 return 'b';
-        }
-        
+        }       
         return 'c';
     }
     
@@ -325,10 +319,4 @@ public class MancalaModel {
           return mB.getAmount();
        return -1;
     }
-    
-    
-
-    
-    
-    
 }
