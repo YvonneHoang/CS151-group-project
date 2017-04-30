@@ -23,16 +23,7 @@ public class MancalaModel {
      * @param pick number of stones in each pit
      * 
      */
-    public MancalaModel(int numberOfStones) {
-        
-        a = new Pit[6];
-        for(int i =0; i < 6;i++) {
-            a[i] = new Pit(numberOfStones);
-        }
-        b = new Pit[6];
-        for(int i =0; i < 6;i++) {
-            b[i] = new Pit(numberOfStones);
-        }
+    public MancalaModel() {
         currentPlayer = 'a';
         mA = new Player();
         mB = new Player();
@@ -42,6 +33,17 @@ public class MancalaModel {
         undoValue = new int[14];
        // undoReset = 0;
         cListeners = new ArrayList<ChangeListener>();
+    }
+    
+        private void setStoneCount(int numberOfStones) {
+        a = new Pit[6];
+        for(int i =0; i < 6;i++) {
+            a[i] = new Pit(numberOfStones);
+        }
+        b = new Pit[6];
+        for(int i =0; i < 6;i++) {
+            b[i] = new Pit(numberOfStones);
+        }
     }
     
     private void saveState()
