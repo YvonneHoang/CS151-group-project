@@ -19,7 +19,7 @@ public class Pit {
     {
        amount++;
     }
-    public int takeAll()
+    public int take()
     {
        int result = amount;
        amount = 0;
