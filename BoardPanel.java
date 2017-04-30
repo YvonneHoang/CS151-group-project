@@ -29,7 +29,7 @@ public class BoardPanel extends JPanel
 		super();
 		this.model = model;
 		int stones = selectInitialStones();
-		//model.setStones(stones)
+		model.setStoneCount(stones);
 		pitsA = new ArrayList<PitComponent>();
 		pitsB = new ArrayList<PitComponent>();	
 		mancala = new ArrayList<MancalaComponent>();
