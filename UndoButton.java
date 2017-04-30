@@ -22,7 +22,7 @@ public class UndoButton extends JButton implements ChangeListener
 	{
 		super("Undo");
 		this.model = model;
-		
+		model.attach(this);
 		this.addActionListener(new ActionListener()
 		{
 			//button clicked --> call to model undo
