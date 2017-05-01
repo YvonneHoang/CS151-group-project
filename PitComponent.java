@@ -3,8 +3,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 /**
- * View and 
- * @author vonnehoang
+ * View and controller class that contains pit details
+ * such as id, number of stones, and paint command.
+ * 
+ * @author Yvonne Hoang
  *
  */
 public class PitComponent extends JComponent implements ChangeListener

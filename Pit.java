@@ -1,10 +1,6 @@
 public class Pit {
     private int amount;
     
-    public Pit(int initialAmount)
-    {
-       amount = initialAmount; 
-    }
     /*
      * method to return user the number of stones in pits.
      */

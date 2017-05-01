@@ -1,5 +1,3 @@
-package mancala;
-
 import java.util.*;
 import javax.swing.event.*;
 
@@ -26,6 +24,14 @@ public class MancalaModel {
      */
     public MancalaModel() {
         currentPlayer = 'a';
+        a = new Pit[6];
+        b = new Pit[6];
+        for(int i =0; i < 6;i++) {
+            a[i] = new Pit();
+        }
+        for(int i =0; i < 6;i++) {
+            b[i] = new Pit();
+        }
         mA = new Player();
         mB = new Player();
         undoTruth = false;
@@ -37,14 +43,15 @@ public class MancalaModel {
     }
     
     public void setStoneCount(int numberOfStones) {
-        a = new Pit[6];
-        for(int i =0; i < 6;i++) {
-            a[i] = new Pit(numberOfStones);
+    	for(int i =0; i < 6;i++) {
+            a[i].setStones(numberOfStones);
         }
-        b = new Pit[6];
         for(int i =0; i < 6;i++) {
-            b[i] = new Pit(numberOfStones);
+        	b[i].setStones(numberOfStones);
         }
+        
+        for(ChangeListener l : cListeners)
+        	l.stateChanged(new ChangeEvent(this));
     }
     
     public void saveState()
@@ -72,8 +79,16 @@ public class MancalaModel {
      */
     public void update() {
         for(ChangeListener l : cListeners)
-        {
             l.stateChanged(new ChangeEvent(this));
+        for(int i = 0; i < 6; i++)
+        {
+        	Pit p = a[i];
+        	System.out.println("A[" + i + "] = " + p.getAmount());
+        }
+        for(int i = 0; i < 6; i++)
+        {
+        	Pit p = b[i];
+        	System.out.println("B[" + i + "] = " + p.getAmount());
         }
     }
 

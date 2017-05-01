@@ -28,30 +28,37 @@ public class BoardPanel extends JPanel
 	{
 		super();
 		this.model = model;
-		int stones = selectInitialStones();
-		model.setStoneCount(stones);
+		selectBoardStyle();
 		pitsA = new ArrayList<PitComponent>();
 		pitsB = new ArrayList<PitComponent>();	
 		mancala = new ArrayList<MancalaComponent>();
-		mancala.add(new MancalaComponent('a', style, model));
-		mancala.add(new MancalaComponent('b', style, model));
 		
 		this.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
 		this.setLayout(null);
 		
 		Insets inset = this.getInsets();
 		
-		for(int i = 0; i < 6; i++)
+		mancala.add(new MancalaComponent('a', style, model));
+		mancala.get(0).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
+		add(mancala.get(0));
+		mancala.add(new MancalaComponent('b', style, model));
+		mancala.get(1).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
+		add(mancala.get(1));
+		
+		for(int i = 0; i < 12; i++)
 		{
-			pitsA.add(new PitComponent(i, style, model));
-			pitsA.get(i).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
-			add(pitsA.get(i));
-		}
-		for(int i = 0; i < 6; i++)
-		{
-			pitsB.add(new PitComponent(i, style, model));
-			pitsB.get(i).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
-			add(pitsB.get(i));
+			if(i < 6)
+			{
+				pitsA.add(new PitComponent(i, style, model));
+				pitsA.get(i).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
+				add(pitsA.get(i));
+			}	
+			else
+			{
+				pitsB.add(new PitComponent(i, style, model));
+				pitsB.get(i % 6).setBounds(inset.left, inset.top, style.getWidth(), style.getHeight());
+				add(pitsB.get(i % 6));
+			}
 		}
 		
 		addMouseListener(new MouseAdapter()
@@ -114,19 +121,24 @@ public class BoardPanel extends JPanel
 	}
 	
 	/**
-	 * Prompts user for a number from 1 to 4 to initially fill 
-	 * the pits with that number of stones.
-	 * @return initial number of stones
+	 * Displays a message window to user prompting for
+	 * a board style.
 	 */
-	private int selectInitialStones()
+	private void selectBoardStyle()
 	{
-		int stones = 0;
-		while(stones == 0 && stones < 5)
-		{
-			String input = JOptionPane.showInputDialog(this, "Enter the number of stones to be placed in each pit (max 4):");
-			if(Character.isDigit(input.charAt(0)))
-				stones = Integer.parseInt(input);
-		}
-		return stones;
+		Object[] options = {"Fancy Board", "Black Board"};
+		int style = JOptionPane.showOptionDialog(
+				this, 
+				new JLabel("Choose a board layout.", JLabel.CENTER),
+				"Select Board Style",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				options,
+				null);
+		if(style == JOptionPane.YES_OPTION)
+			this.setBoardStyle(new FancyBoard());
+		else if(style == JOptionPane.NO_OPTION)
+			this.setBoardStyle(new BlackBoard());
 	}
 }

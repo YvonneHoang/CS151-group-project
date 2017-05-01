@@ -22,7 +22,7 @@ public class MancalaFrame extends JFrame
 	/**
 	 * Sets BoardStyle and arranges BoardPanel and
 	 * UndoButton
-	 * @param model MancalaModel used by board
+	 * @param model game used by board
 	 * @param board BoardPanel containing view of mancala board
 	 */
 	public MancalaFrame(MancalaModel model, BoardPanel board)
@@ -30,40 +30,44 @@ public class MancalaFrame extends JFrame
 		this.model = model;
 		this.board = board;	
 		
-		selectBoardStyle();
-
-		setLocationRelativeTo(null);
+		model.setStoneCount(0);
+		
+//		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
+		setTitle("Mancala");
 		
 		add(board, BorderLayout.NORTH);
 		
 		JPanel p = new JPanel();
 		p.add(new UndoButton(model));
+		add(p);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
+		
+		int stones = selectInitialStones();
+		model.setStoneCount(stones);
+		board.repaint();
 	}
 	
 	/**
-	 * Displays a message window to user prompting for
-	 * a board style.
+	 * Prompts user for a number from 1 to 4 to initially fill 
+	 * the pits with that number of stones.
+	 * @return initial number of stones
 	 */
-	private void selectBoardStyle()
+	private int selectInitialStones()
 	{
-		Object[] options = {"Circle Board", "Rectangle Board"};
-		int style = JOptionPane.showOptionDialog(
-				this, 
-				new JLabel("Choose a board layout.", JLabel.CENTER),
-				"Select Board Style",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.PLAIN_MESSAGE,
-				null,
-				options,
-				null);
-		if(style == JOptionPane.YES_OPTION)
-			board.setBoardStyle(new ConcreteBoardv1());
-//		else if(style == JOptionPane.NO_OPTION)
-//			board.setBoardStyle(new RectangleBoard());
+		int stones = 0;
+		while(stones == 0 && stones < 5)
+		{
+			String input = JOptionPane.showInputDialog(null, "Enter the number of stones to be placed in each pit (max 4):");
+			if(Character.isDigit(input.charAt(0)))
+				stones = Integer.parseInt(input);
+		}
+		return stones;
 	}
+	
+	
+
 }
