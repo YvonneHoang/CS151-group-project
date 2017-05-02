@@ -1,3 +1,4 @@
+
 import java.util.*;
 import javax.swing.event.*;
 
@@ -43,15 +44,15 @@ public class MancalaModel {
     }
     
     public void setStoneCount(int numberOfStones) {
-    	for(int i =0; i < 6;i++) {
+        for(int i =0; i < 6;i++) {
             a[i].setStones(numberOfStones);
         }
         for(int i =0; i < 6;i++) {
-        	b[i].setStones(numberOfStones);
+            b[i].setStones(numberOfStones);
         }
         
         for(ChangeListener l : cListeners)
-        	l.stateChanged(new ChangeEvent(this));
+            l.stateChanged(new ChangeEvent(this));
     }
     
     public void saveState()
@@ -82,14 +83,15 @@ public class MancalaModel {
             l.stateChanged(new ChangeEvent(this));
         for(int i = 0; i < 6; i++)
         {
-        	Pit p = a[i];
-        	System.out.println("A[" + i + "] = " + p.getAmount());
+            Pit p = a[i];
+            System.out.println("A[" + i + "] = " + p.getAmount());
         }
         for(int i = 0; i < 6; i++)
         {
-        	Pit p = b[i];
-        	System.out.println("B[" + i + "] = " + p.getAmount());
+            Pit p = b[i];
+            System.out.println("B[" + i + "] = " + p.getAmount());
         }
+        System.out.println("M[" +mA.getAmount() + "] " + "M2[" + mB.getAmount() + "]" );
     }
 
     public void performTurn(char p, int pitNum) {
@@ -103,7 +105,11 @@ public class MancalaModel {
         //pointer to current player acts like a node?
         char node = p;
         
+        getPits(currentPlayer)[pitNum].take();
+        
         //move stones to the next pit if possible
+       
+        
         
         int tempPit = pitNum+1;
         boolean goAgain = false;
@@ -161,7 +167,7 @@ public class MancalaModel {
                 getPits(oppPlayer)[oppPit].take();
             }
         }
-        getPits(currentPlayer)[pitNum].take();
+      //  getPits(currentPlayer)[pitNum].take();
         update(); 
     }
     
@@ -184,6 +190,7 @@ public class MancalaModel {
         undoReset--;
         System.out.println(undoReset);
         update();
+
     }
     /*
      * helper method to get opposite pit number
