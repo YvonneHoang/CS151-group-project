@@ -1,5 +1,7 @@
 
 import java.util.*;
+
+import javax.swing.JOptionPane;
 import javax.swing.event.*;
 
 
@@ -82,9 +84,16 @@ public class MancalaModel {
         for(ChangeListener l : cListeners)
             l.stateChanged(new ChangeEvent(this));
         for(int i = 0; i < 6; i++)
+        {
             Pit p = a[i];
+            System.out.println("A[" + i + "] = " + p.getAmount());
+        }
         for(int i = 0; i < 6; i++)
+        {
             Pit p = b[i];
+            System.out.println("B[" + i + "] = " + p.getAmount());
+        }
+        System.out.println("M[" +mA.getAmount() + "] " + "M2[" + mB.getAmount() + "]" );
     }
 
     public void performTurn(char p, int pitNum) {
@@ -185,6 +194,30 @@ public class MancalaModel {
         update();
 
     }
+    
+    public void reset() {
+        for(int i =0; i < 6;i++) {
+            a[i] = new Pit();
+        }
+        for(int i =0; i < 6;i++) {
+            b[i] = new Pit();
+        }
+        mA = new Player();
+        mB = new Player();
+        undoTruth = false;
+        undoCount = 3;
+        int stones = 0;
+        while(stones == 0 && stones < 5)
+        {
+            String input = JOptionPane.showInputDialog(null, "Enter the number of stones to be placed in each pit (max 4):");
+            if(Character.isDigit(input.charAt(0)))
+                stones = Integer.parseInt(input);
+        }
+        setStoneCount(stones);
+        update();
+        
+    }
+    
     /*
      * helper method to get opposite pit number
      */
