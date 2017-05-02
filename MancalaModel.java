@@ -91,7 +91,6 @@ public class MancalaModel {
             Pit p = b[i];
             System.out.println("B[" + i + "] = " + p.getAmount());
         }
-        System.out.println("M[" +mA.getAmount() + "] " + "M2[" + mB.getAmount() + "]" );
     }
 
     public void performTurn(char p, int pitNum) {
