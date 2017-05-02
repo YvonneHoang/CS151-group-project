@@ -75,7 +75,7 @@ public class BoardPanel extends JPanel
 					else
 						player = 'b';
 					int pitNum = selectedPit % 6;
-					if(selectedPit > 0)
+					if(selectedPit >= 0)
 						model.performTurn(player, pitNum);
 					if(model.checkWinner() == 'a')
 						//draw victory
