@@ -91,7 +91,7 @@ public class BlackBoard implements BoardStyle {
 				int y = (int)pitShapes.get(pitID).getBounds2D().getY();
 				g2.setColor(Color.WHITE);
 				g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 15));
-				g2.drawString("B"+String.valueOf((pitID+1)%6), x + 15, y + PIT_DIAMETER + 15);
+				g2.drawString("B"+String.valueOf(((pitID)% 6) + 1), x + 15, y + PIT_DIAMETER + 15);
 			}
 			
 		}
