@@ -193,14 +193,37 @@ public class FancyBoard implements BoardStyle {
 		Random random = new Random();
 		
 		
-		for (int i=0; i < stones; i++){
-			int rx = random.nextInt(w) + x;
-			int ry = random.nextInt(h) + y;
-			while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER))) {
-				rx = random.nextInt(w - STONE_DIAMETER) + x;
-				ry = random.nextInt(h - STONE_DIAMETER) + y;
+		for (int i=1; i <= stones; i++){
+			switch (i) {
+			case 1: 
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2, y+h/2-STONE_DIAMETER/2, null); break; //mid
+			case 2:
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2+STONE_DIAMETER, y+h/2-STONE_DIAMETER/2, null); break;  //right
+			case 3:
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2-STONE_DIAMETER, y+h/2-STONE_DIAMETER/2, null); break;  //left
+			case 4:
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2, y+h/2-STONE_DIAMETER/2-STONE_DIAMETER, null); break;  //up
+			case 5:
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2, y+h/2-STONE_DIAMETER/2+STONE_DIAMETER, null); break;  //down
+			case 6: 
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2-STONE_DIAMETER, y+h/2-STONE_DIAMETER/2-STONE_DIAMETER, null); break;  //up-left
+			case 7: 
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2+STONE_DIAMETER, y+h/2-STONE_DIAMETER/2-STONE_DIAMETER, null); break; //up-right
+			case 8: 
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2-STONE_DIAMETER, y+h/2-STONE_DIAMETER/2+STONE_DIAMETER, null); break; //down-left
+			case 9: 
+				g2.drawImage(stoneIMG, x+w/2-STONE_DIAMETER/2+STONE_DIAMETER, y+h/2-STONE_DIAMETER/2+STONE_DIAMETER, null); break; //down-right
+			default: 
+				int rx = random.nextInt(w) + x;
+				int ry = random.nextInt(h) + y;
+				while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER))) {
+					rx = random.nextInt(w - STONE_DIAMETER) + x;
+					ry = random.nextInt(h - STONE_DIAMETER) + y;
+				}
+				g2.drawImage(stoneIMG, rx, ry, null);
 			}
-			g2.drawImage(stoneIMG, rx, ry, null);
+			
+			
 		}
 	}
 
