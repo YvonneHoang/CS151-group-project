@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 /**
- * View and controller class that contains board, pits, and mancala.
+ * View and controller class that contains board, pits, and mancala
+ * views and controllers.
  * 
  * @author Yvonne Hoang
  */
@@ -77,16 +78,9 @@ public class BoardPanel extends JPanel
 					int pitNum = selectedPit % 6;
 					if(selectedPit >= 0)
 						model.performTurn(player, pitNum);
-					if(model.checkWinner() == 'a')
-						//draw victory
-					    endGame()
-						;
-					else if(model.checkWinner() == 'b')
-						//draw victory
-					    endGame()
-						;
-					else
-						//do nothing
+					if(model.checkWinner() == 'a' || model.checkWinner() == 'b')
+						endGame();
+					else //do nothing
 						;
 					
 				}
@@ -145,12 +139,19 @@ public class BoardPanel extends JPanel
 			this.setBoardStyle(new BlackBoard());
 	}
 	
-	private void endGame() {
+	/**
+	 * Displays a message window declaring which player won
+	 * and asking if they would like to play again.
+	 */
+	private void endGame()
+	{
 	    int option = JOptionPane.showConfirmDialog(null, "Player " + Character.toUpperCase(model.checkWinner()) + " wins!\nDo you wish to play again?", "Congratulations!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-	    if (option == JOptionPane.NO_OPTION) {
+	    if (option == JOptionPane.NO_OPTION)
+	    {
             System.exit(0);
         }
-        else {
+        else 
+        {
             model.reset();
         }
 	}

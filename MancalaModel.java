@@ -101,17 +101,6 @@ public class MancalaModel
     {
         for(ChangeListener l : cListeners)
             l.stateChanged(new ChangeEvent(this));
-        for(int i = 0; i < 6; i++)
-        {
-            Pit p = a[i];
-            System.out.println("A[" + i + "] = " + p.getAmount());
-        }
-        for(int i = 0; i < 6; i++)
-        {
-            Pit p = b[i];
-            System.out.println("B[" + i + "] = " + p.getAmount());
-        }
-        System.out.println("M[" +mA.getAmount() + "] " + "M2[" + mB.getAmount() + "]" );
     }
 
     /**
@@ -195,7 +184,6 @@ public class MancalaModel
                 getPits(oppPlayer)[oppPit].take();
             }
         }
-        //getPits(currentPlayer)[pitNum].take();
         update(); 
     }
     /**

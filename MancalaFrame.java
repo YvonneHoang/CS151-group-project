@@ -6,8 +6,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * View class that contains mancala board panel and
- * undo button.
+ * View and controller class that contains a BoardPanel and
+ * UndoButton. Also sets the initial number of stones per pit.
  * 
  * @author Yvonne Hoang
  */
@@ -32,7 +32,6 @@ public class MancalaFrame extends JFrame
 		
 		model.setStoneCount(0);
 		
-//		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
 		setTitle("Mancala");
 		

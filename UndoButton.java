@@ -7,7 +7,7 @@ import javax.swing.event.ChangeListener;
  * Controller class expressly used for calling model's undo function,
  * changing the board to a prior state.
  * 
- * @author vonnehoang
+ * @author Yvonne Hoang
  *
  */
 public class UndoButton extends JButton implements ChangeListener

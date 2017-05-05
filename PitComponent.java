@@ -11,15 +11,15 @@ import javax.swing.event.*;
  */
 public class PitComponent extends JComponent implements ChangeListener
 {
-	int pitID; //0-5 for a, and 6-11 for b
-	int stones; //get from model
+	int pitID;
+	int stones;
 	BoardStyle style;
 	MancalaModel model;
 	
 	/**
-	 * Creates a pit with an ID from which player identity can
-	 * be derived.
-	 * @param pitID 0 - 5 is for player a, 6 - 11 is for player b
+	 * Creates a pit and attaches to model as a ChangeListener.
+	 * @param pitID id that signifies pit position and owner
+	 * precondition: [0~5] is for player a, [6~11] is for player b
 	 * @param style style of board
 	 * @param model instance of mancala game
 	 */
@@ -54,7 +54,6 @@ public class PitComponent extends JComponent implements ChangeListener
 	/**
 	 * Updates stone count.
 	 */
-	@Override
 	public void stateChanged(ChangeEvent e) 
 	{
 		char player;

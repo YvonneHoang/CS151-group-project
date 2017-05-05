@@ -11,11 +11,18 @@ import javax.swing.event.*;
  */
 public class MancalaComponent extends JComponent implements ChangeListener
 {
-	char mID; //0-5 for a, and 6-11 for b
-	int stones; //get from model
+	char mID;
+	int stones;
 	BoardStyle style;
 	MancalaModel model;
 	
+	/**
+	 * Creates a mancala and attaches to model as a ChangeListener.
+	 * @param mID signifies the owner
+	 * precondition: 'a' or 'b'
+	 * @param style style of board set by BoardPanel class
+	 * @param model instance of the game
+	 */
 	public MancalaComponent(char mID, BoardStyle style, MancalaModel model) 
 	{
 		super();
@@ -46,7 +53,6 @@ public class MancalaComponent extends JComponent implements ChangeListener
 	/**
 	 * Updates stone count.
 	 */
-	@Override
 	public void stateChanged(ChangeEvent e) 
 	{
 		this.stones = model.getMancalaValue(mID);

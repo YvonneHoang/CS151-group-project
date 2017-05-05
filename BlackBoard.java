@@ -14,10 +14,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * A view class implementing BoardStyle that draws the board,
+ * mancala, pits, and labels using Java library shapes.
+ * 
  * @author UnHou Chan
  *
  */
-public class BlackBoard implements BoardStyle {
+public class BlackBoard implements BoardStyle 
+{
 	
 	private final static int BOARD_WIDTH = 400;	//W
 	private final static int BOARD_HEIGHT= 150;	//H
@@ -32,10 +36,13 @@ public class BlackBoard implements BoardStyle {
 	private Shape mancalaShapesB;
 	private Shape boardShape;
 	
-	/**Initializing all Shapes that will be drawn
-	 * 
+	/**
+	 * Initializing the style.
+	 *
+	 * Creates all shapes that will be drawn.
 	 */
-	public BlackBoard(){
+	public BlackBoard()
+	{
 		/*Board*/
 		boardShape = new Rectangle2D.Double(0,0,BOARD_WIDTH, BOARD_HEIGHT);
 		
@@ -44,7 +51,8 @@ public class BlackBoard implements BoardStyle {
 		mancalaShapesB = new Ellipse2D.Double(0,0, MAN_WIDTH, MAN_HEIGHT);
 		
 		/*PlayerA's pit*/
-		for (int i=0;i<6;i++){
+		for (int i=0;i<6;i++)
+		{
 			/* formula:
 			 * x = (i+1)*d
 			 * y = H-d
@@ -52,7 +60,8 @@ public class BlackBoard implements BoardStyle {
 			pitShapes.add(new Ellipse2D.Double((i+1)*PIT_DIAMETER, BOARD_HEIGHT-PIT_DIAMETER, PIT_DIAMETER, PIT_DIAMETER));
 		}
 		/*PlayerB's pit*/
-		for (int i=0;i<6;i++){
+		for (int i=0;i<6;i++)
+		{
 			/* formula:
 			 * x = W - (i+2)*d
 			 * y = 0
@@ -62,31 +71,40 @@ public class BlackBoard implements BoardStyle {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see finalProject.BoardStyle#drawBoard(java.awt.Graphics2D)
+	/**
+	 * Draws the board
+	 * @param g2 provided by Java VM
 	 */
-	@Override
-	public void drawBoard(Graphics2D g2) {
+	public void drawBoard(Graphics2D g2)
+	{
 		g2.setColor(new Color(0));
 		g2.fill(boardShape);
 	}
 
-	/* (non-Javadoc)
-	 * @see finalProject.BoardStyle#drawPit(int, int, java.awt.Graphics2D)
+	/**
+	 * Draws a pit
+	 * @param pitID label specifying position and owner
+	 * precondition: [0~5] is A1~A6, [6~11] is B1~B6
+	 * @param stones # of stones in the pit
+	 * @param g2 provided by Java VM
 	 */
-	@Override
-	public void drawPit(int pitID, int stones, Graphics2D g2) {
-		if (pitID<=11 && pitID >=0) {
+	public void drawPit(int pitID, int stones, Graphics2D g2)
+	{
+		if (pitID<=11 && pitID >=0)
+		{
 			g2.setColor(new Color(0x005500));
 			g2.fill(pitShapes.get(pitID));
 			this.drawStone(g2, pitShapes.get(pitID), stones);
-			if (pitID<6) {
+			if (pitID<6)
+			{
 				int x = (int)pitShapes.get(pitID).getBounds2D().getX();
 				int y = (int)pitShapes.get(pitID).getBounds2D().getY();
 				g2.setColor(Color.WHITE);
 				g2.setFont(new Font(Font.DIALOG, Font.PLAIN, 15));
 				g2.drawString("A"+String.valueOf((pitID+1)), x + 15, y);
-			} else {
+			} 
+			else 
+			{
 				int x = (int)pitShapes.get(pitID).getBounds2D().getX();
 				int y = (int)pitShapes.get(pitID).getBounds2D().getY();
 				g2.setColor(Color.WHITE);
@@ -97,18 +115,23 @@ public class BlackBoard implements BoardStyle {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see finalProject.BoardStyle#drawMancala(int, int, java.awt.Graphics2D)
+	/**
+	 * draws a mancala
+	 * @param mID label specifying position and owner
+	 * precondition: 0 is MancalaA, 1 is MancalaB
+	 * @param stones # of stones in the mancala
+	 * @param g2 provided by Java VM
 	 */
-	@Override
-	public void drawMancala(int mID, int stones, Graphics2D g2) {
+	public void drawMancala(int mID, int stones, Graphics2D g2)
+	{
 		Shape temp = null;
 		String ab = "";
 		if (mID == 0) 
 			{temp = this.mancalaShapesA; ab = "A";}
 		if (mID == 1)
 			{temp = this.mancalaShapesB; ab = "B";}
-		if (temp!= null) {
+		if (temp!= null) 
+		{
 			g2.setColor(new Color(0xa3823a));
 			g2.fill(temp);
 			//drawString
@@ -121,32 +144,51 @@ public class BlackBoard implements BoardStyle {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see finalProject.BoardStyle#pitSelected(java.awt.Point)
+	/**
+	 * Analyzes which pit has been clicked.
+	 * @param p the Point object holding coordinates of mouse click.
+	 * @return int values that correspond to pitID.
+	 * <br>[0~5] : A1~A6
+	 * <br>[6~11] : B1~B6
+	 * <br> -1 : no pit selected
 	 */
-	@Override
-	public int pitSelected(Point p) {
-		for (int i=0; i<12; i++){
+	public int pitSelected(Point p)
+	{
+		for (int i=0; i<12; i++)
+		{
 			if (this.pitShapes.get(i).contains(p))
 				return i;
 		}
 		return -1;
 	}
 
-	/* (non-Javadoc)
-	 * @see finalProject.BoardStyle#pitSelected(int, int)
+	/**
+	 * Analyzes which pit has been clicked.
+	 * @param x the x coordinate of the click location
+	 * @param y the y coordinate of the click location
+	 * @return int values that correspond to pitID.
+	 * <br>[0~5] : A1~A6
+	 * <br>[6~11] : B1~B6
+	 * <br> -1 : no pit selected
 	 */
-	@Override
-	public int pitSelected(int x, int y) {
-		for (int i=0; i<12; i++){
+	public int pitSelected(int x, int y)
+	{
+		for (int i=0; i<12; i++)
+		{
 			if (this.pitShapes.get(i).contains(x, y))
 				return i;
 		}
 		return -1;
 	}
 	
-	
-	public void drawStone(Graphics2D g2, Shape s, int stones){
+	/**
+	 * Helper method that draws the stones inside a pit.
+	 * @param g2 provided by Java VM
+	 * @param s either mancalaShapesA, mancalaShapesB or element of pitShapes
+	 * @param stones
+	 */
+	private void drawStone(Graphics2D g2, Shape s, int stones)
+	{
 		int x = (int) s.getBounds2D().getX();
 		int y = (int) s.getBounds2D().getY();
 		int w = (int) s.getBounds2D().getWidth();
@@ -154,11 +196,12 @@ public class BlackBoard implements BoardStyle {
 		
 		Random random = new Random();
 		
-		
-		for (int i=0; i < stones; i++){
+		for (int i=0; i < stones; i++)
+		{
 			int rx = random.nextInt(w) + x;
 			int ry = random.nextInt(h) + y;
-			while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER))) {
+			while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER)))
+			{
 				rx = random.nextInt(w - STONE_DIAMETER) + x;
 				ry = random.nextInt(h - STONE_DIAMETER) + y;
 			}
@@ -170,14 +213,21 @@ public class BlackBoard implements BoardStyle {
 		}
 	}
 
-	@Override
-	public int getWidth() {
+	/**
+	 * Finds width of board
+	 * @return Width of the board
+	 */
+	public int getWidth()
+	{
 		return BOARD_WIDTH;
 	}
 
-	@Override
-	public int getHeight() {
-		// TODO Auto-generated method stub
+	/**
+	 * Finds height of board
+	 * @return Height of the board
+	 */
+	public int getHeight()
+	{
 		return BOARD_HEIGHT;
 	}
 
