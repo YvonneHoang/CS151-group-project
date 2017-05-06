@@ -195,15 +195,57 @@ public class BlackBoard implements BoardStyle
 		int h = (int) s.getBounds2D().getHeight();
 		
 		Random random = new Random();
+		int rx;
+		int ry;
 		
-		for (int i=0; i < stones; i++)
+		for (int i=1; i <= stones; i++)
 		{
-			int rx = random.nextInt(w) + x;
-			int ry = random.nextInt(h) + y;
-			while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER)))
+			switch (i) 
 			{
-				rx = random.nextInt(w - STONE_DIAMETER) + x;
-				ry = random.nextInt(h - STONE_DIAMETER) + y;
+				case 1:
+					rx = x+w/2-STONE_DIAMETER/2;
+					ry = y+h/2-STONE_DIAMETER/2;
+					break;  //mid
+				case 2:
+					rx = x+w/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2;
+					break;  //right
+				case 3:
+					rx = x+w/2-STONE_DIAMETER/2-STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2; 
+					break;  //left
+				case 4:
+					rx = x+w/2-STONE_DIAMETER/2;
+					ry = y+h/2-STONE_DIAMETER/2-STONE_DIAMETER;
+					break;  //up
+				case 5:
+					rx = x+w/2-STONE_DIAMETER/2;
+					ry = y+h/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					break;  //down
+				case 6: 
+					rx = x+w/2-STONE_DIAMETER/2-STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2-STONE_DIAMETER; 
+					break;  //up-left
+				case 7: 
+					rx = x+w/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2-STONE_DIAMETER;
+					break; //up-right
+				case 8: 
+					rx = x+w/2-STONE_DIAMETER/2-STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					break; //down-left
+				case 9: 
+					rx = x+w/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					ry = y+h/2-STONE_DIAMETER/2+STONE_DIAMETER;
+					break; //down-right
+				default: 
+					rx = random.nextInt(w) + x;
+					ry = random.nextInt(h) + y;
+					while (!s.contains(new Rectangle2D.Double(rx,ry,STONE_DIAMETER,STONE_DIAMETER)))
+					{
+						rx = random.nextInt(w - STONE_DIAMETER) + x;
+						ry = random.nextInt(h - STONE_DIAMETER) + y;
+					}
 			}
 			Shape stoneShape = new Ellipse2D.Double(rx, ry, STONE_DIAMETER, STONE_DIAMETER);
 			g2.setColor(new Color(0));
