@@ -174,7 +174,7 @@ public class MancalaModel
             else
                 currentPlayer = 'a';
             
-            if (currentPlayer == p && getPitValue(p, tempPit-1) == 1)
+            if (node == p && getPitValue(p, tempPit-1) == 1)
             {
                 char oppPlayer = getOppPlayer(p);
                 int oppPit = oppPit(tempPit - 1);
