@@ -184,6 +184,7 @@ public class MancalaModel
                 getPits(oppPlayer)[oppPit].take();
             }
         }
+	//getPits(currentPlayer)[pitNum].take();
         update(); 
     }
     /**
