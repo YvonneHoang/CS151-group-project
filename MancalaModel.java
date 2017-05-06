@@ -108,28 +108,20 @@ public class MancalaModel
      * @param p the player the selected pit belongs to
      * @param pitNum the number/position of the pit
      */
-    public void performTurn(char p, int pitNum)
-    {
+    public void performTurn(char p, int pitNum) {
         int pitValue = getPitValue(currentPlayer, pitNum);
-        if(pitValue==0|| p!= currentPlayer)
-        {
+        if(pitValue==0|| p!= currentPlayer) {
             //nothing happens and we close the loop
             return;
-        }       
-        saveState(); 
-        
-        //pointer to current player acts like a node?
+        }
+        saveState();
         char node = p;
+
         
-        getPits(currentPlayer)[pitNum].take();
-        
-        //move stones to the next pit if possible
-       
         int tempPit = pitNum+1;
         boolean goAgain = false;
         
-        while (pitValue!=0) 
-        {
+        while (pitValue!=0) {
             
             while (tempPit < 6 && pitValue != 0)
             {
@@ -159,32 +151,31 @@ public class MancalaModel
             
             }
             //loop again for remaining stones
-            if(pitValue > 0)
-            {
+            if(pitValue >0) {
                 tempPit = 0;
                 node = getOppPlayer(node);
             }
         }
         
         //case where your turn ends, go again or not
-        if(!goAgain)
-        {
+        if(!goAgain) {
             if (currentPlayer == 'a')
                 currentPlayer = 'b';
             else
                 currentPlayer = 'a';
             
+            //ended on empty pit
             if (node == p && getPitValue(p, tempPit-1) == 1)
             {
                 char oppPlayer = getOppPlayer(p);
-                int oppPit = oppPit(tempPit - 1);
+                int oppPit = oppPit(tempPit-1);
                 int giveValue = getPitValue(oppPlayer, oppPit) + 1;
-                getPlayer(node).addStones(giveValue);
-                getPits(node)[tempPit-1].take();
+                getPlayer(p).addStones(giveValue);
+                getPits(p)[tempPit-1].take();
                 getPits(oppPlayer)[oppPit].take();
             }
         }
-	//getPits(currentPlayer)[pitNum].take();
+       getPits(p)[pitNum].take();
         update(); 
     }
     /**
