@@ -1,8 +1,3 @@
-/**
- * 
- */
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -37,7 +32,7 @@ public class BlackBoard implements BoardStyle
 	private Shape boardShape;
 	
 	/**
-	 * Initializing the style.
+	 * Initializes the style.
 	 *
 	 * Creates all shapes that will be drawn.
 	 */

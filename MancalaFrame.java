@@ -55,7 +55,7 @@ public class MancalaFrame extends JFrame
 	 * the pits with that number of stones.
 	 * @return initial number of stones
 	 */
-	private int selectInitialStones()
+	public static int selectInitialStones()
 	{
 		int stones = 0;
 		while(stones == 0 && stones < 5)

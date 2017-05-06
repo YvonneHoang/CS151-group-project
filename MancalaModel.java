@@ -227,14 +227,7 @@ public class MancalaModel
         mB = new Player();
         undoTruth = false;
         undoCount = 3;
-        int stones = 0;
-        while(stones == 0 && stones < 5)
-        {
-            String input = JOptionPane.showInputDialog(null, "Enter the number of stones to be placed in each pit (max 4):");
-            if(Character.isDigit(input.charAt(0)))
-                stones = Integer.parseInt(input);
-        }
-        setStoneCount(stones);
+        
         update();
         
     }
