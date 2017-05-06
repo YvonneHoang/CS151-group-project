@@ -179,8 +179,8 @@ public class MancalaModel
                 char oppPlayer = getOppPlayer(p);
                 int oppPit = oppPit(tempPit - 1);
                 int giveValue = getPitValue(oppPlayer, oppPit) + 1;
-                getPlayer(currentPlayer).addStones(giveValue);
-                getPits(currentPlayer)[tempPit-1].take();
+                getPlayer(node).addStones(giveValue);
+                getPits(node)[tempPit-1].take();
                 getPits(oppPlayer)[oppPit].take();
             }
         }
